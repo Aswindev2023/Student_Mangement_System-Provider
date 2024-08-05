@@ -22,7 +22,7 @@ class HomeProvider with ChangeNotifier {
   Future<void> getAllUserDetails() async {
     _userList = [];
     var users = await _userService.readAllUser();
-    print('Fetched users: $users');
+
     users.forEach((student) {
       var studentModel = User();
       studentModel.id = student['id'];
@@ -36,23 +36,18 @@ class HomeProvider with ChangeNotifier {
     });
     _filteredUserList = List.from(_userList);
     notifyListeners();
-    print('User list: ${_userList.map((user) => user.name).toList()}');
   }
 
   void updateDisplayedUsers(String query) {
-    print('search query is $query');
     _isSearching = query.isNotEmpty;
-    print(
-        'User list before filtering: ${_userList.map((user) => user.name).toList()}');
 
     _filteredUserList = _userList.where((user) {
       final userName = user.name?.trim().toLowerCase() ?? '';
       final searchQuery = query.trim().toLowerCase();
-      print("Checking user: $userName, query: $searchQuery");
+
       return userName.contains(searchQuery);
     }).toList();
-    print(
-        'Filtered user list: ${_filteredUserList.map((user) => user.name).toList()}');
+
     notifyListeners();
   }
 
@@ -74,7 +69,7 @@ class HomeProvider with ChangeNotifier {
       _filteredUserList = List.from(_userList);
       notifyListeners();
     } catch (e) {
-      print('Error deleting user: $e');
+      throw Exception('failed to delete');
     }
   }
 

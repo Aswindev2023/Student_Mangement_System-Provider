@@ -57,8 +57,6 @@ class Homepage extends StatelessWidget {
       ),
       body: Consumer<HomeProvider>(
         builder: (context, homeProvider, _) {
-          print(
-              'Rebuilding UI with user list: ${homeProvider.filteredUserList.map((user) => user.name).toList()}');
           return homeProvider.filteredUserList.isEmpty
               ? const Center(
                   child: Text(

@@ -20,20 +20,17 @@ class UserService {
   // UpdateUser method in UserService
   updateUser(User user) async {
     if (user.id != null) {
-      // print('Updating user: $user');
       return await _repository.updateData('Students', user.userMap());
     } else {
-      print('Cannot update user with null id.');
-      return null; // or handle the case differently
+      return null;
     }
   }
 
   Future<void> deleteUser(int userId) async {
     try {
       await _repository.deleteDataById('Students', userId);
-      print('User deleted: $userId');
     } catch (e) {
-      print('Error deleting user: $e');
+      throw Exception('Error deleting user: $e');
     }
   }
 }
