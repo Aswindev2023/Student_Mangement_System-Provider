@@ -179,9 +179,10 @@ class AddStudent extends StatelessWidget {
                                       student.imagePath =
                                           userImageProvider.imageFile?.path ??
                                               '';
-                                      //print('_student imagePath before save: ${_student.imagePath}');
+
                                       var result =
                                           await _userService.saveUser(student);
+                                      userImageProvider.setImageFile(null);
                                       Navigator.pop(context, result);
                                     }
                                   },

@@ -183,6 +183,7 @@ class EditUser extends StatelessWidget {
                               onPressed: () async {
                                 _updateUser(context, user, editStudentProvider,
                                     userImageProvider);
+                                userImageProvider.setImageFile(null);
                               },
                               child: const Text(
                                 'Update',
